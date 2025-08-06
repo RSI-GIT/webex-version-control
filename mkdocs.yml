@@ -1,0 +1,68 @@
+site_name: Shadow Agent for Webex
+site_description: "Real-time monitoring and webhook integration for Webex services."
+site_author: Shadow Agent Team
+site_url: https://your-site-url.com/
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  font:
+    text: Roboto
+    code: JetBrains Mono
+
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: cyan
+      accent: deep purple
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: cyan
+      accent: lime
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+    - content.action.edit
+    - content.action.view
+    - content.footnotes
+    - content.tooltips
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+
+extra:
+  social:
+    - icon: material/web
+      link: https://webex.com
+      title: Webex
+
+nav:
+  - 🏠 Home: index.md
+  - 🔗 Webhooks:
+      - 👤 User Presence: webhooks/user_presence.md
+      - 📞 Queue Presence: webhooks/queue_presence.md
+      - 📟 Calls:
+          - ✅ Answered: webhooks/calls/answered.md
+          - ❌ Unanswered: webhooks/calls/unanswered.md
+          - 🚫 Abandoned: webhooks/calls/abandoned_queue_call.md
