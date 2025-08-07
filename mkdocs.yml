@@ -15,14 +15,14 @@ theme:
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: cyan
+      primary: indigo # Changed from cyan to indigo for better readability
       accent: deep purple
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: cyan
+      primary: blue grey # Changed from cyan to blue grey for dark mode
       accent: lime
       toggle:
         icon: material/weather-night
@@ -67,3 +67,5 @@ nav:
           - ✅ Answered: webhooks/calls/answered.md
           - ❌ Unanswered: webhooks/calls/Unanswered.md
           - 🚫 Abandoned: webhooks/calls/abandoned_queue_call.md
+  - ℹ️ Api Documentation:
+      - 💬 Status Message: Api_Documentation/statusmessage.md
