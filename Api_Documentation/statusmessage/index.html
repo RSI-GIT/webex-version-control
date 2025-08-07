@@ -12,13 +12,11 @@
         <meta name="author" content="Shadow Agent Team">
       
       
-        <link rel="canonical" href="https://your-site-url.com/webhooks/queue_presence/">
+        <link rel="canonical" href="https://your-site-url.com/Api_Documentation/statusmessage/">
       
       
-        <link rel="prev" href="../user_presence/">
+        <link rel="prev" href="../../webhooks/calls/abandoned_queue_call/">
       
-      
-        <link rel="next" href="../calls/answered/">
       
       
       <link rel="icon" href="../../assets/favicon.png">
@@ -26,7 +24,7 @@
     
     
       
-        <title>📞 Queue Presence - Shadow Agent for Webex</title>
+        <title>💬 Status Message - Shadow Agent for Webex</title>
       
     
     
@@ -78,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#queue-monitor-events" class="md-skip">
+        <a href="#status-message-api-documentation" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              📞 Queue Presence
+              💬 Status Message
             
           </span>
         </div>
@@ -229,13 +227,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../user_presence/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../webhooks/user_presence/" class="md-tabs__link">
           
   
   
@@ -251,11 +247,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../Api_Documentation/statusmessage/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -325,31 +323,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   
@@ -362,7 +355,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             🔗 Webhooks
@@ -376,7 +369,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../user_presence/" class="md-nav__link">
+      <a href="../../webhooks/user_presence/" class="md-nav__link">
         
   
   
@@ -396,32 +389,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    📞 Queue Presence
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../webhooks/queue_presence/" class="md-nav__link">
         
   
   
@@ -432,119 +403,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#purpose" class="md-nav__link">
-    <span class="md-ellipsis">
-      Purpose
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      Endpoint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#payload-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      Payload Structure
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Payload Structure">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#items-object" class="md-nav__link">
-    <span class="md-ellipsis">
-      Items Object
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#field-descriptions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Field Descriptions
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#received-payload-examples" class="md-nav__link">
-    <span class="md-ellipsis">
-      Received Payload Examples
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Received Payload Examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#agent-joins-a-queue" class="md-nav__link">
-    <span class="md-ellipsis">
-      Agent Joins a Queue
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#agent-leaves-a-queue" class="md-nav__link">
-    <span class="md-ellipsis">
-      Agent Leaves a Queue
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multiple-agents-in-one-payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      Multiple Agents in One Payload
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -563,20 +421,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
-          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
             
   
   
@@ -603,7 +458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../calls/answered/" class="md-nav__link">
+      <a href="../../webhooks/calls/answered/" class="md-nav__link">
         
   
   
@@ -626,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../calls/Unanswered/" class="md-nav__link">
+      <a href="../../webhooks/calls/Unanswered/" class="md-nav__link">
         
   
   
@@ -649,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../calls/abandoned_queue_call/" class="md-nav__link">
+      <a href="../../webhooks/calls/abandoned_queue_call/" class="md-nav__link">
         
   
   
@@ -684,26 +539,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -716,7 +576,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             ℹ️ Api Documentation
@@ -727,10 +587,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../Api_Documentation/statusmessage/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    💬 Status Message
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -741,6 +623,197 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#endpoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      Endpoint
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#headers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Headers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request Body
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#allowed-status-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allowed Status Values
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#response-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Response Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Response Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#success-response-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success Response (200)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-unchanged-response-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      Status Unchanged Response (200)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Responses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Responses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-status-message-400" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing Status Message (400)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-status-400" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invalid Status (400)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-json-400" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invalid JSON (400)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-error-500" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server Error (500)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Important Notes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -780,9 +853,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#purpose" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Purpose
+      Overview
     </span>
   </a>
   
@@ -798,19 +871,46 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#payload-structure" class="md-nav__link">
+  <a href="#authentication" class="md-nav__link">
     <span class="md-ellipsis">
-      Payload Structure
+      Authentication
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Payload Structure">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#request-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Request Format">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#items-object" class="md-nav__link">
+  <a href="#headers" class="md-nav__link">
     <span class="md-ellipsis">
-      Items Object
+      Headers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-body" class="md-nav__link">
+    <span class="md-ellipsis">
+      Request Body
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
     </span>
   </a>
   
@@ -822,46 +922,83 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#field-descriptions" class="md-nav__link">
+  <a href="#allowed-status-values" class="md-nav__link">
     <span class="md-ellipsis">
-      Field Descriptions
+      Allowed Status Values
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#received-payload-examples" class="md-nav__link">
+  <a href="#response-format" class="md-nav__link">
     <span class="md-ellipsis">
-      Received Payload Examples
+      Response Format
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Received Payload Examples">
+    <nav class="md-nav" aria-label="Response Format">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#agent-joins-a-queue" class="md-nav__link">
+  <a href="#success-response-200" class="md-nav__link">
     <span class="md-ellipsis">
-      Agent Joins a Queue
+      Success Response (200)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#agent-leaves-a-queue" class="md-nav__link">
+  <a href="#status-unchanged-response-200" class="md-nav__link">
     <span class="md-ellipsis">
-      Agent Leaves a Queue
+      Status Unchanged Response (200)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#multiple-agents-in-one-payload" class="md-nav__link">
+  <a href="#error-responses" class="md-nav__link">
     <span class="md-ellipsis">
-      Multiple Agents in One Payload
+      Error Responses
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Responses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#missing-status-message-400" class="md-nav__link">
+    <span class="md-ellipsis">
+      Missing Status Message (400)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-status-400" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invalid Status (400)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invalid-json-400" class="md-nav__link">
+    <span class="md-ellipsis">
+      Invalid JSON (400)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#server-error-500" class="md-nav__link">
+    <span class="md-ellipsis">
+      Server Error (500)
     </span>
   </a>
   
@@ -869,6 +1006,20 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#important-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Important Notes
+    </span>
+  </a>
   
 </li>
       
@@ -888,98 +1039,139 @@
 
 
 
-<h1 id="queue-monitor-events">Queue Monitor Events</h1>
-<hr />
-<h2 id="purpose">Purpose</h2>
-<p>This webhook provides real-time notifications when an agent joins or leaves a queue in Webex.</p>
+<h1 id="status-message-api-documentation">Status Message API Documentation</h1>
+<h2 id="overview">Overview</h2>
+<p>This API endpoint allows you to update status messages for different user statuses. It stores status messages for later use when users change their status, acting as a "memory" system for status messages.</p>
+<p><strong>Important Note</strong>: This endpoint only updates the stored message for a specific status type. It does NOT change the user's current active status.</p>
 <h2 id="endpoint">Endpoint</h2>
-<p>The system sends HTTP POST requests to the configured webhook URL.</p>
-<ul>
-<li><strong>Content-Type:</strong> <code>application/json</code></li>
-<li><strong>Header:</strong> <code>x-org-id: &lt;Organization ID&gt;</code></li>
-</ul>
-<hr />
-<h2 id="payload-structure">Payload Structure</h2>
-<p>The payload contains the following fields:</p>
-<ul>
-<li><code>payload</code>: A static identifier, always set to <code>queue-monitor</code>.</li>
-<li><code>timestamp</code>: The ISO 8601 UTC timestamp indicating when the event was generated.</li>
-<li><code>items</code>: An object containing the users and their queue status changes.</li>
-</ul>
-<h3 id="items-object">Items Object</h3>
-<ul>
-<li><code>userId</code> (string): The ID of the agent.</li>
-<li><code>queueId</code> (string): The ID of the queue.</li>
-<li><code>status</code> (string): The agent's new status in the queue. Can be either <code>'active'</code> or <code>'inactive'</code>.</li>
-</ul>
-<hr />
-<h2 id="field-descriptions">Field Descriptions</h2>
+<div class="highlight"><pre><span></span><code>POST /status-message
+</code></pre></div>
+<h2 id="authentication">Authentication</h2>
+<p>This endpoint requires proper authorization headers. The user's <code>orgId</code> and <code>userId</code> will be extracted from the authorization context.</p>
+<h2 id="request-format">Request Format</h2>
+<h3 id="headers">Headers</h3>
+<div class="highlight"><pre><span></span><code>Content-Type: application/json
+Authorization: [Your authorization token]
+</code></pre></div>
+<h3 id="request-body">Request Body</h3>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avl&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;statusMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Available for urgent matters only&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="parameters">Parameters</h3>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Field</th>
-<th style="text-align: left;">Type</th>
-<th style="text-align: left;">Description</th>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><code>payload</code></td>
-<td style="text-align: left;"><code>string</code></td>
-<td style="text-align: left;">Always <code>"queue-monitor"</code> — indicates the event type.</td>
+<td><code>status</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The status type for which to store the message</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>timestamp</code></td>
-<td style="text-align: left;"><code>string</code></td>
-<td style="text-align: left;">UTC timestamp of when the event was generated.</td>
-</tr>
-<tr>
-<td style="text-align: left;"><code>items</code></td>
-<td style="text-align: left;"><code>object</code></td>
-<td style="text-align: left;">A map of <code>userId</code> to their queue changes.</td>
+<td><code>statusMessage</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>The message to associate with this status</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="received-payload-examples">Received Payload Examples</h2>
-<h3 id="agent-joins-a-queue">Agent Joins a Queue</h3>
+<h2 id="allowed-status-values">Allowed Status Values</h2>
+<p>The following status values are accepted:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="s2">&quot;avl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dnd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;busy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;oof&quot;</span><span class="p">];</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>avl</code></td>
+<td>Available</td>
+</tr>
+<tr>
+<td><code>dnd</code></td>
+<td>Do Not Disturb</td>
+</tr>
+<tr>
+<td><code>busy</code></td>
+<td>Busy</td>
+</tr>
+<tr>
+<td><code>oof</code></td>
+<td>Out of Office</td>
+</tr>
+</tbody>
+</table>
+<h2 id="response-format">Response Format</h2>
+<h3 id="success-response-200">Success Response (200)</h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-07-23T18:53:26.298Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9a...&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNm...&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Status updated successfully&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avl&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;statusMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Available for urgent matters only&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="agent-leaves-a-queue">Agent Leaves a Queue</h3>
+<h3 id="status-unchanged-response-200">Status Unchanged Response (200)</h3>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-07-23T19:02:11.551Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9a...&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNT...&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Status message for &#39;avl&#39; unchanged&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;userId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;user123&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;avl&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;statusMessage&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Available for urgent matters only&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="multiple-agents-in-one-payload">Multiple Agents in One Payload</h3>
-<p>If changes for multiple users happen simultaneously, they can appear in the same payload:</p>
+<h3 id="error-responses">Error Responses</h3>
+<h4 id="missing-status-message-400">Missing Status Message (400)</h4>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-07-23T19:05:00.000Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;&lt;userId1&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;&lt;queueId&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;&lt;userId2&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;&lt;queueId&gt;&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Status is required&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MISSING_STATUS&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>Note:</strong> If no changes are detected during a polling cycle, no webhook will be sent.</p>
+<h4 id="invalid-status-400">Invalid Status (400)</h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Valid status is required&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;validStatuses&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;avl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;dnd&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;busy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;oof&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;receivedStatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invalid_status&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="invalid-json-400">Invalid JSON (400)</h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid JSON in request body&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INVALID_JSON&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h4 id="server-error-500">Server Error (500)</h4>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Internal Server Error&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INTERNAL_ERROR&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="important-notes">Important Notes</h2>
+<ol>
+<li>
+<p><strong>Duplicate Prevention</strong>: If the same status message is sent for a status that already has that exact message, no update occurs and a "unchanged" response is returned.</p>
+</li>
+<li>
+<p><strong>Trimming</strong>: Status messages are automatically trimmed of leading/trailing whitespace.</p>
+</li>
+<li>
+<p><strong>Timestamps</strong>: When a status message is updated, the following timestamps are automatically set:</p>
+</li>
+<li><code>lastSMChanged</code></li>
+<li><code>lastActivity</code></li>
+<li><code>lastModified</code></li>
+</ol>
 
 
 
