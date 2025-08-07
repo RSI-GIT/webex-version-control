@@ -67,5 +67,3 @@ nav:
           - ✅ Answered: webhooks/calls/answered.md
           - ❌ Unanswered: webhooks/calls/Unanswered.md
           - 🚫 Abandoned: webhooks/calls/abandoned_queue_call.md
-  - ℹ️ Api Documentation:
-      - 💬 Status Message: Api_Documentation/statusmessage.md
