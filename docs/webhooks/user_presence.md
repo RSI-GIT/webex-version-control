@@ -1,79 +1,120 @@
-# Webex Presence Webhook Integration Guide
+# User Presence
 
-## Overview
+This webhook will be checking the status every 3 seconds. Depending on the user status and status message, it will send data. If no changes happen, no data will be sent.
 
-The webhook sends a POST request to a pre-configured URL whenever a change in user presence is detected. This allows external services to stay synchronized with Webex user statuses.
+## Sample Payloads
 
-## Payload Format
-
-The webhook payload is sent as a JSON object in the body of the POST request.
-
-### Headers
-
-The following HTTP headers are included in the request:
-
-| Header         | Description                       |
-| -------------- | --------------------------------- |
-| `Content-Type` | `application/json`                |
-| `x-org-id`     | The ID of the Webex organization. |
-
-### Body
-
-The body of the request contains the presence information.
-
-**Example Body:**
+### Do Not Disturb
 
 ```json
 {
-  "payload": "user-presence",
-  "items": [
-    {
-      "id": "abc123",
-      "emails": ["john@example.com"],
-      "sipAddresses": [
-        {
-          "type": "cloud",
-          "value": "sip:john@example.com",
-          "primary": true
-        }
-      ],
-      "displayName": "John Doe",
-      "nickName": "Johnny",
-      "firstName": "John",
-      "lastName": "Doe",
-      "orgId": "org-12345",
-      "status": "active",
-      "lastModified": "2025-06-30T10:05:00Z",
-      "lastActivity": "2025-06-30T10:10:00Z",
-      "type": "person",
-      "department": "Engineering"
-    }
-  ]
+  "body": {
+    "payload": "user-presence",
+    "items": [
+      {
+        "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+        "status": "DoNotDisturb",
+        "statusMessage": "test update dnd 2",
+        "lastActivity": "2025-08-15T16:42:27.199Z",
+        "lastModified": "2025-06-05T13:24:42.790Z"
+      }
+    ],
+    "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+    "timestamp": "2025-08-15T16:42:29.315Z"
+  },
+  "method": "POST",
+  "url": "/webhook"
 }
 ```
 
-### Body Field Descriptions
+### Active
 
-| Field          | Type     | Description                                                              |
-| -------------- | -------- | ------------------------------------------------------------------------ |
-| `payload`      | `string` | Always `user-presence` for this webhook.                                 |
-| `items`        | `array`  | A list of user presence objects that have changed.                       |
-| `id`           | `string` |                                                                          |
-| `emails`       | `array`  |                                                                          |
-| `sipAddresses` | `array`  |                                                                          |
-| `displayName`  | `string` |                                                                          |
-| `nickName`     | `string` |                                                                          |
-| `firstName`    | `string` |                                                                          |
-| `lastName`     | `string` |                                                                          |
-| `orgId`        | `string` | The ID of the organization the user belongs to.                          |
-| `status`       | `string` | The user's presence status (e.g., `active`, `inactive`, `DoNotDisturb`). |
-| `lastModified` | `string` | The timestamp of the last modification to the user's profile.            |
-| `lastActivity` | `string` | The timestamp of the user's last activity.                               |
-| `type`         | `string` | The type of object, typically `person`.                                  |
-| `department`   | `string` |                                                                          |
+```json
+{
+  "body": {
+    "payload": "user-presence",
+    "items": [
+      {
+        "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+        "status": "active",
+        "statusMessage": "test update 2",
+        "lastActivity": "2025-08-15T16:42:36.772Z",
+        "lastModified": "2025-06-05T13:24:42.790Z"
+      }
+    ],
+    "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+    "timestamp": "2025-08-15T16:42:40.184Z"
+  },
+  "method": "POST",
+  "url": "/webhook"
+}
+```
 
-## Update Frequency
+### Unknown
 
-- The webhook is triggered approximately **every 2 seconds**.
-- A notification is sent **only if** there has been a change in any user's presence since the last successful update.
-- The change detection mechanism relies on a combination of Webex APIs and a diffing process against a DynamoDB database that stores the last known presence states.
+```json
+{
+  "body": {
+    "payload": "user-presence",
+    "items": [
+      {
+        "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+        "status": "unknown",
+        "statusMessage": "Busy",
+        "lastActivity": "2025-08-15T16:43:04.836Z",
+        "lastModified": "2025-06-05T13:24:42.790Z"
+      }
+    ],
+    "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+    "timestamp": "2025-08-15T16:43:06.295Z"
+  },
+  "method": "POST",
+  "url": "/webhook"
+}
+```
+
+### Away | Out of Office
+
+```json
+{
+  "body": {
+    "payload": "user-presence",
+    "items": [
+      {
+        "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+        "status": "OutOfOffice",
+        "statusMessage": "Out of office",
+        "lastActivity": "2025-08-15T16:43:19.636Z",
+        "lastModified": "2025-06-05T13:24:42.790Z"
+      }
+    ],
+    "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+    "timestamp": "2025-08-15T16:48:06.602Z"
+  },
+  "method": "POST",
+  "url": "/webhook"
+}
+```
+
+### On Call
+
+```json
+{
+  "body": {
+    "payload": "user-presence",
+    "items": [
+      {
+        "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+        "status": "call",
+        "statusMessage": "",
+        "lastActivity": "2025-08-15T16:49:53.758Z",
+        "lastModified": "2025-06-05T13:24:42.790Z"
+      }
+    ],
+    "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+    "timestamp": "2025-08-15T16:49:57.123Z"
+  },
+  "method": "POST",
+  "url": "/webhook"
+}
+```

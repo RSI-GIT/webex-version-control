@@ -1,5 +1,4 @@
-# Welcome to Shadow Agent for Webex
+# Webex Webhook Documentation
 
-**Real-time monitoring and webhook integration for Webex services.**
-
-This documentation provides a comprehensive guide to understanding and utilizing the Shadow Agent for Webex.
+Welcome to the **Shadow Agent for Webex** documentation.  
+This guide provides details about the different webhook payloads sent from Webex.

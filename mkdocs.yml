@@ -3,6 +3,7 @@ site_description: "Real-time monitoring and webhook integration for Webex servic
 site_author: Shadow Agent Team
 site_url: https://your-site-url.com/
 
+site_name: Webex Webhook Documentation
 theme:
   name: material
   logo: assets/logo.png
@@ -58,12 +59,13 @@ extra:
       link: https://webex.com
       title: Webex
 
+  favicon: assets/logo.png
 nav:
-  - 🏠 Home: index.md
-  - 🔗 Webhooks:
-      - 👤 User Presence: webhooks/user_presence.md
-      - 📞 Queue Presence: webhooks/queue_presence.md
-      - 📟 Calls:
-          - ✅ Answered: webhooks/calls/answered.md
-          - ❌ Unanswered: webhooks/calls/Unanswered.md
-          - 🚫 Abandoned: webhooks/calls/abandoned_queue_call.md
+  - Home: index.md  
+  - A1 Team :
+    - Payloads: payload.md
+    - Webhooks:
+      - Telephony: webhooks/telephony.md
+      - CDR: webhooks/cdr.md
+      - User Presence: webhooks/user_presence.md
+      - Queue Monitor: webhooks/queue_monitor.md

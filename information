@@ -1,0 +1,368 @@
+webex documenation,
+webhooks detail to A1 team 
+
+payloads : 
+realtime - > realtime telephony detail 
+webex-cdr -> webex cdr feed
+user-presence -> user presence / status message update
+
+queue-monitor -> queue presence 
+
+
+
+telephony detail : 
+
+its raw data comming from the webex, normal call contains 3 stages , update , created , deleted by their events
+
+sample for a normal direct call : 
+[
+  {
+    "body": {
+      "Payload": "telephony",
+      "timestamp": "2025-08-14T18:53:03.419Z",
+      "items": {
+        "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svN2QyMTBjMjUtYWJmZi00MjAxLWE0OGMtMjI3ZDRkNWY3OTI1",
+        "name": "WebexSAPROD",
+        "targetUrl": "https://f8c2wc8446.execute-api.us-east-1.amazonaws.com/telephony",
+        "resource": "telephony_calls",
+        "event": "updated",
+        "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+        "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84OWYwOGUyYi02MDM4LTQ3MmMtYjcyYy0zNjQyNjIwMThjNjE",
+        "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzZjU0MjYwYTQyMjhjY2NlNWY4YjM3NDVlYjYzMDA0MDYzYjVlZTgzOWRlNDE4YjMyOGFkMGMxZTA5MjAzYzgx",
+        "ownedBy": "creator",
+        "status": "active",
+        "created": "2025-06-30T20:13:25.614Z",
+        "actorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84OWYwOGUyYi02MDM4LTQ3MmMtYjcyYy0zNjQyNjIwMThjNjE",
+        "data": {
+          "eventType": "updated",
+          "eventTimestamp": "2025-08-14T18:52:41.730Z",
+          "callId": "Y2lzY29zcGFyazovL3VzL0NBTEwvY2FsbGhhbGYtOTgyNzEzMjM3MDow",
+          "callSessionId": "MWFmMDFjNTQtOTdlMS00ODA3LWEzZjgtMTY2ODNiNjFhNjQw",
+          "personality": "terminator",
+          "state": "alerting",
+          "muteCapable": false,
+          "muted": false,
+          "remoteParty": {
+            "name": "CQX Q1  -  POUYA SHAHRDAMI",
+            "number": "+19059227700",
+            "privacyEnabled": false,
+            "callType": "external"
+          },
+          "appearance": 1,
+          "created": "2025-08-14T18:52:41.728Z",
+          "redirections": [
+            {
+              "reason": "callQueue",
+              "redirectingParty": {
+                "name": "CQX Q1",
+                "number": "+12895133479",
+                "privacyEnabled": false,
+                "callType": "location"
+              }
+            }
+          ],
+          "completedElsewhere": false
+        }
+      },
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  },
+  {
+    "body": {
+      "Payload": "telephony",
+      "timestamp": "2025-08-14T18:53:02.738Z",
+      "items": {
+        "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svN2QyMTBjMjUtYWJmZi00MjAxLWE0OGMtMjI3ZDRkNWY3OTI1",
+        "name": "WebexSAPROD",
+        "targetUrl": "https://f8c2wc8446.execute-api.us-east-1.amazonaws.com/telephony",
+        "resource": "telephony_calls",
+        "event": "created",
+        "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+        "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84OWYwOGUyYi02MDM4LTQ3MmMtYjcyYy0zNjQyNjIwMThjNjE",
+        "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzZjU0MjYwYTQyMjhjY2NlNWY4YjM3NDVlYjYzMDA0MDYzYjVlZTgzOWRlNDE4YjMyOGFkMGMxZTA5MjAzYzgx",
+        "ownedBy": "creator",
+        "status": "active",
+        "created": "2025-06-30T20:13:25.614Z",
+        "actorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84OWYwOGUyYi02MDM4LTQ3MmMtYjcyYy0zNjQyNjIwMThjNjE",
+        "data": {
+          "eventType": "received",
+          "eventTimestamp": "2025-08-14T18:52:41.729Z",
+          "callId": "Y2lzY29zcGFyazovL3VzL0NBTEwvY2FsbGhhbGYtOTgyNzEzMjM3MDow",
+          "callSessionId": "MWFmMDFjNTQtOTdlMS00ODA3LWEzZjgtMTY2ODNiNjFhNjQw",
+          "personality": "terminator",
+          "state": "alerting",
+          "muteCapable": false,
+          "muted": false,
+          "remoteParty": {
+            "name": "CQX Q1  -  POUYA SHAHRDAMI",
+            "number": "+19059227700",
+            "privacyEnabled": false,
+            "callType": "external"
+          },
+          "appearance": 1,
+          "created": "2025-08-14T18:52:41.728Z",
+          "redirections": [
+            {
+              "reason": "callQueue",
+              "redirectingParty": {
+                "name": "CQX Q1",
+                "number": "+12895133479",
+                "privacyEnabled": false,
+                "callType": "location"
+              }
+            }
+          ],
+          "completedElsewhere": false
+        }
+      },
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  }
+  {
+    "body": {
+      "Payload": "telephony",
+      "timestamp": "2025-08-14T18:53:04.091Z",
+      "items": {
+        "id": "Y2lzY29zcGFyazovL3VzL1dFQkhPT0svN2QyMTBjMjUtYWJmZi00MjAxLWE0OGMtMjI3ZDRkNWY3OTI1",
+        "name": "WebexSAPROD",
+        "targetUrl": "https://f8c2wc8446.execute-api.us-east-1.amazonaws.com/telephony",
+        "resource": "telephony_calls",
+        "event": "deleted",
+        "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+        "createdBy": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84OWYwOGUyYi02MDM4LTQ3MmMtYjcyYy0zNjQyNjIwMThjNjE",
+        "appId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MzZjU0MjYwYTQyMjhjY2NlNWY4YjM3NDVlYjYzMDA0MDYzYjVlZTgzOWRlNDE4YjMyOGFkMGMxZTA5MjAzYzgx",
+        "ownedBy": "creator",
+        "status": "active",
+        "created": "2025-06-30T20:13:25.614Z",
+        "actorId": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS84OWYwOGUyYi02MDM4LTQ3MmMtYjcyYy0zNjQyNjIwMThjNjE",
+        "data": {
+          "eventType": "disconnected",
+          "eventTimestamp": "2025-08-14T18:52:43.357Z",
+          "callId": "Y2lzY29zcGFyazovL3VzL0NBTEwvY2FsbGhhbGYtOTgyNzEzMjM3MDow",
+          "callSessionId": "MWFmMDFjNTQtOTdlMS00ODA3LWEzZjgtMTY2ODNiNjFhNjQw",
+          "personality": "terminator",
+          "state": "disconnected",
+          "muteCapable": false,
+          "muted": false,
+          "remoteParty": {
+            "name": "POUYA SHAHRDAMI",
+            "number": "+19059227700",
+            "privacyEnabled": false,
+            "callType": "external"
+          },
+          "created": "2025-08-14T18:52:41.728Z",
+          "disconnected": "2025-08-14T18:52:43.357Z",
+          "completedElsewhere": true
+        }
+      },
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  }
+]
+
+webex-cdr -> raw cdr feed from webex api , will be sent every 5 minutes if anything exists, if not no data will be passed,
+
+sample for cdr feed : 
+"body": {
+      "payload": "webex-cdr",
+      "items": [
+        {
+          "Answer time": "",
+          "Answered": "false",
+          "Direction": "ORIGINATING",
+          "Called line ID": "NA",
+          "Call ID": "SSE164953585150825-1351543787@10.250.194.97",
+          "Calling line ID": "NA",
+          "Start time": "2025-08-15T16:49:53.576Z",
+          "Call type": "SIP_NATIONAL",
+          "Client type": "TEAMS_WXC_CLIENT",
+          "Client version": "45.8.0.32875",
+          "Correlation ID": "3e8d11ca-7965-4eba-b961-dd7a419649ab",
+          "International country": "",
+          "Device MAC": "",
+          "Duration": 0,
+          "Inbound trunk": "",
+          "Org UUID": "171117d6-8b82-44ca-98e9-ac1157f2cd1d",
+          "Original reason": "",
+          "OS type": "windows",
+          "Outbound trunk": "",
+          "Redirect reason": "",
+          "Related reason": "",
+          "Report ID": "399a6e2c-169a-3262-93b3-49feb903d4fd",
+          "Report time": "2025-08-15T16:50:01.772Z",
+          "Route group": "",
+          "Site main number": "+12895133484",
+          "Site timezone": "-240",
+          "Sub client type": "",
+          "User UUID": "a808befa-9138-461c-b9af-392c784e0c1a",
+          "User type": "User",
+          "User": "Pouya Shahrdami",
+          "Called number": "+19059227700",
+          "Calling number": "+12895133483",
+          "Location": "RSI",
+          "Dialed digits": "+19059227700",
+          "Releasing party": "Local",
+          "Redirecting number": "",
+          "Site UUID": "419f6d68-a080-47dc-99df-38fa40223406",
+          "Department ID": "",
+          "Transfer related call ID": "",
+          "Authorization code": "",
+          "Model": "",
+          "Local SessionID": "9dea6285012050008000178cc521a001",
+          "Remote SessionID": "",
+          "Call transfer time": "",
+          "Local call ID": "9850472912:0",
+          "Remote call ID": "",
+          "Network call ID": "BW1649536451508251171865576@10.71.220.6",
+          "Related call ID": "",
+          "User number": "+12895133483",
+          "Call outcome": "Success",
+          "Call outcome reason": "Normal",
+          "Ring duration": "8",
+          "Answer indicator": "No",
+          "Release time": "2025-08-15T16:50:01.772Z",
+          "Final local SessionID": "9dea6285012050008000178cc521a001",
+          "Final remote SessionID": "",
+          "PSTN legal entity": "Cisco Systems Canada Co",
+          "PSTN vendor org ID": "0b43a1a8-2efd-4892-b301-e7a5a6d2c884",
+          "PSTN vendor name": "Cisco Calling Plans",
+          "PSTN provider ID": "00414f37-267d-40eb-9355-2c1876c202a1",
+          "External customer ID": "",
+          "Redirecting party UUID": "",
+          "Public Calling IP Address": "NA",
+          "Public Called IP Address": "NA",
+          "Caller ID number": "+12895133483",
+          "External caller ID number": "+12895133483",
+          "Device owner UUID": "",
+          "Call Recording Platform Name": "",
+          "Call Recording Result": "",
+          "Call Recording Trigger": ""
+        }
+      ]
+    },
+
+
+
+user-presence : will be checking the status every 3 seconds , deponds on user status , user status message , it will send data
+                if no changes happens no data will be sent,
+
+sample user presence : 
+ // do not disturb 
+ {
+    "body": {
+      "payload": "user-presence",
+      "items": [
+        {
+          "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+          "status": "DoNotDisturb",
+          "statusMessage": "test update dnd 2",
+          "lastActivity": "2025-08-15T16:42:27.199Z",
+          "lastModified": "2025-06-05T13:24:42.790Z"
+        }
+      ],
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+      "timestamp": "2025-08-15T16:42:29.315Z"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  },
+
+  // active 
+
+   {
+    "body": {
+      "payload": "user-presence",
+      "items": [
+        {
+          "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+          "status": "active",
+          "statusMessage": "test update 2",
+          "lastActivity": "2025-08-15T16:42:36.772Z",
+          "lastModified": "2025-06-05T13:24:42.790Z"
+        }
+      ],
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+      "timestamp": "2025-08-15T16:42:40.184Z"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  },
+
+  
+  // unknown
+
+    "body": {
+      "payload": "user-presence",
+      "items": [
+        {
+          "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+          "status": "unknown",
+          "statusMessage": "Busy",
+          "lastActivity": "2025-08-15T16:43:04.836Z",
+          "lastModified": "2025-06-05T13:24:42.790Z"
+        }
+      ],
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+      "timestamp": "2025-08-15T16:43:06.295Z"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  },
+
+  // away | out of office 
+    {
+    "body": {
+      "payload": "user-presence",
+      "items": [
+        {
+          "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+          "status": "OutOfOffice",
+          "statusMessage": "Out of office",
+          "lastActivity": "2025-08-15T16:43:19.636Z",
+          "lastModified": "2025-06-05T13:24:42.790Z"
+        }
+      ],
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+      "timestamp": "2025-08-15T16:48:06.602Z"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  },    
+  // on call 
+  {
+    "body": {
+      "payload": "user-presence",
+      "items": [
+        {
+          "id": "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE",
+          "status": "call",
+          "statusMessage": "",
+          "lastActivity": "2025-08-15T16:49:53.758Z",
+          "lastModified": "2025-06-05T13:24:42.790Z"
+        }
+      ],
+      "orgId": "Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi8xNzExMTdkNi04YjgyLTQ0Y2EtOThlOS1hYzExNTdmMmNkMWQ",
+      "timestamp": "2025-08-15T16:49:57.123Z"
+    },
+    "method": "POST",
+    "url": "/webhook"
+  },
+
+  queue-monitor : will check the queue status and shows the status of the quque if changes happen
+
+  sample : 
+  {
+  "payload": "queue-monitor",
+  "timestamp": "2025-07-23T18:53:26.298Z",
+  "items": {
+    "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9a...": { // user id 
+      "Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNm...": "active" // queue id 
+    }
+  }
+}
