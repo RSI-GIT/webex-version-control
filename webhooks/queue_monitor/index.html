@@ -20,7 +20,7 @@
       
       
       <link rel="icon" href="../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.22">
     
     
       
@@ -28,7 +28,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.84d31ad4.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -553,18 +553,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#it-can-also-show-multiple-users-queue-statuses-if-they-trigger-updates-simultaneously" class="md-nav__link">
+  <a href="#example-full-payload-array" class="md-nav__link">
     <span class="md-ellipsis">
-      It can also show multiple users’ queue statuses if they trigger updates simultaneously.
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sample-payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sample Payload
+      Example (full payload array)
     </span>
   </a>
   
@@ -630,18 +621,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#it-can-also-show-multiple-users-queue-statuses-if-they-trigger-updates-simultaneously" class="md-nav__link">
+  <a href="#example-full-payload-array" class="md-nav__link">
     <span class="md-ellipsis">
-      It can also show multiple users’ queue statuses if they trigger updates simultaneously.
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#sample-payload" class="md-nav__link">
-    <span class="md-ellipsis">
-      Sample Payload
+      Example (full payload array)
     </span>
   </a>
   
@@ -667,19 +649,216 @@
 <p>This webhook will check the queue status and show the status of the queue if changes happen.</p>
 <p>This webhook monitors queue status and reports any changes.</p>
 <h4 id="it-can-display-more-than-one-queue-status-at-a-time">It can display more than one queue status at a time.</h4>
-<h4 id="it-can-also-show-multiple-users-queue-statuses-if-they-trigger-updates-simultaneously">It can also show multiple users’ queue statuses if they trigger updates simultaneously.</h4>
-<h2 id="sample-payload">Sample Payload</h2>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-07-23T18:53:26.298Z&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9a...&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="c1">// user id</span>
-<span class="w">      </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNm...&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span><span class="w"> </span><span class="c1">// queue id</span>
+<div class="admonition danger">
+<p class="admonition-title">New Update: Queue Monitor payload </p>
+<p>You now receive an array of update objects. Each object contains exactly one user entry keyed by <code>userId</code> and includes the user's <code>agentstatus</code> and a <code>queues</code> map with details per <code>queueId</code>.</p>
+<ul>
+<li><strong>userId level</strong>: <code>agentstatus</code> shows one of: <code>WRAP_UP</code>, <code>UNAVAILABLE</code>, <code>SIGN_OUT</code>.</li>
+<li><strong>queues map (by queueId)</strong>: Each queue includes <code>queuename</code>, <code>extension</code>, and <code>status</code> where <code>status</code> is either <code>active</code> or <code>inactive</code>.</li>
+<li><strong>Full snapshot semantics</strong>: Every update delivers the full set of queues for the user, even when a given queue did not change. Use this to keep your local state fully in sync without diffing.</li>
+</ul>
+<h3 id="example-full-payload-array">Example (full payload array)</h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">o</span><span class="kc">nl</span><span class="err">y</span><span class="w"> </span><span class="err">age</span><span class="kc">nt</span><span class="w"> </span><span class="err">s</span><span class="kc">tatus</span><span class="w"> </span><span class="err">cha</span><span class="kc">n</span><span class="err">ged</span><span class="w"> </span><span class="mi">-</span><span class="err">&gt;</span><span class="w"> </span><span class="err">Di</span><span class="kc">fferent</span><span class="w"> </span><span class="err">user</span><span class="w"> </span>
+<span class="w">  </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS85NWIwZTU1Yi1iYmU0LTQyZDItYmNmMi0zZGNlMGU0MDE0M2E&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;agentstatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WRAP_UP&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;queues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmRhZjY5MGQtYmMzNi00OTM3LWI4NWQtMmJmMGZjN2YzMWRi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX Q1&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;284&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTk5YTk1MTUtMmQ3MS00ZWI1LTkyZTQtNWU3NWY5MDk4NDg4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FWD CXQ&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;111&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTdiZDFjZjItNTA3NS00NGFkLWI5MTItZjg3YWY1ZDVhYWJl&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX2 .&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;333&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmQ2MTgyYTktNjMzMi00M2Q5LThmYTgtN2VkZTliMzRmMGY2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sales Q&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;274&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvM2E3YTdlOGEtNjhlMC00NjE0LWJiMzgtMjhmMjc3OGI5Mzcw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webex Dev&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">FWD</span><span class="w"> </span><span class="err">CXQ</span><span class="w"> </span><span class="kc">t</span><span class="err">o</span><span class="w"> </span><span class="err">i</span><span class="kc">na</span><span class="err">c</span><span class="kc">t</span><span class="err">ive</span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;agentstatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WRAP_UP&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;queues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmRhZjY5MGQtYmMzNi00OTM3LWI4NWQtMmJmMGZjN2YzMWRi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX Q1&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;284&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTk5YTk1MTUtMmQ3MS00ZWI1LTkyZTQtNWU3NWY5MDk4NDg4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FWD CXQ&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;111&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmQ2MTgyYTktNjMzMi00M2Q5LThmYTgtN2VkZTliMzRmMGY2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sales Q&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;274&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvM2E3YTdlOGEtNjhlMC00NjE0LWJiMzgtMjhmMjc3OGI5Mzcw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webex Dev&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">Age</span><span class="kc">nt</span><span class="w"> </span><span class="err">S</span><span class="kc">tatus</span><span class="w"> </span><span class="err">Cha</span><span class="kc">n</span><span class="err">ged</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;agentstatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNAVAILABLE&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;queues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmRhZjY5MGQtYmMzNi00OTM3LWI4NWQtMmJmMGZjN2YzMWRi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX Q1&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;284&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTk5YTk1MTUtMmQ3MS00ZWI1LTkyZTQtNWU3NWY5MDk4NDg4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FWD CXQ&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;111&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmQ2MTgyYTktNjMzMi00M2Q5LThmYTgtN2VkZTliMzRmMGY2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sales Q&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;274&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvM2E3YTdlOGEtNjhlMC00NjE0LWJiMzgtMjhmMjc3OGI5Mzcw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webex Dev&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">Age</span><span class="kc">nt</span><span class="w"> </span><span class="err">S</span><span class="kc">tatus</span><span class="w"> </span><span class="err">Cha</span><span class="kc">n</span><span class="err">ged</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;agentstatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WRAP_UP&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;queues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmRhZjY5MGQtYmMzNi00OTM3LWI4NWQtMmJmMGZjN2YzMWRi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX Q1&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;284&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTk5YTk1MTUtMmQ3MS00ZWI1LTkyZTQtNWU3NWY5MDk4NDg4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FWD CXQ&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;111&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmQ2MTgyYTktNjMzMi00M2Q5LThmYTgtN2VkZTliMzRmMGY2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sales Q&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;274&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvM2E3YTdlOGEtNjhlMC00NjE0LWJiMzgtMjhmMjc3OGI5Mzcw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webex Dev&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="err">#</span><span class="w"> </span><span class="err">Mul</span><span class="kc">t</span><span class="err">iple</span><span class="w"> </span><span class="err">Queues</span><span class="w"> </span><span class="err">Go</span><span class="kc">t</span><span class="w"> </span><span class="err">I</span><span class="kc">na</span><span class="err">c</span><span class="kc">t</span><span class="err">ive</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;agentstatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WRAP_UP&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;queues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmRhZjY5MGQtYmMzNi00OTM3LWI4NWQtMmJmMGZjN2YzMWRi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX Q1&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;284&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTk5YTk1MTUtMmQ3MS00ZWI1LTkyZTQtNWU3NWY5MDk4NDg4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FWD CXQ&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;111&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmQ2MTgyYTktNjMzMi00M2Q5LThmYTgtN2VkZTliMzRmMGY2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sales Q&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;274&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvM2E3YTdlOGEtNjhlMC00NjE0LWJiMzgtMjhmMjc3OGI5Mzcw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webex Dev&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="err">Age</span><span class="kc">nt</span><span class="w"> </span><span class="err">Sig</span><span class="kc">ne</span><span class="err">d</span><span class="w"> </span><span class="err">Ou</span><span class="kc">t</span><span class="w"> </span>
+<span class="w">    </span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;queue-monitor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL1BFT1BMRS9hODA4YmVmYS05MTM4LTQ2MWMtYjlhZi0zOTJjNzg0ZTBjMWE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;agentstatus&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SIGN_OUT&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;queues&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmRhZjY5MGQtYmMzNi00OTM3LWI4NWQtMmJmMGZjN2YzMWRi&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CQX Q1&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;284&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNTk5YTk1MTUtMmQ3MS00ZWI1LTkyZTQtNWU3NWY5MDk4NDg4&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FWD CXQ&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;111&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvNmQ2MTgyYTktNjMzMi00M2Q5LThmYTgtN2VkZTliMzRmMGY2&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sales Q&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;274&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inactive&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="nt">&quot;Y2lzY29zcGFyazovL3VzL0NBTExfUVVFVUUvM2E3YTdlOGEtNjhlMC00NjE0LWJiMzgtMjhmMjc3OGI5Mzcw&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;queuename&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Webex Dev&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;500&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;active&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<span class="p">]</span>
 </code></pre></div>
+</div>
 
 
 
@@ -730,10 +909,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow", "content.action.edit", "content.action.view", "content.footnotes", "content.tooltips"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow", "content.action.edit", "content.action.view", "content.footnotes", "content.tooltips"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>

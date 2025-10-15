@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://your-site-url.com/</loc>
-         <lastmod>2025-08-15</lastmod>
+         <lastmod>2025-10-15</lastmod>
     </url>
     <url>
          <loc>https://your-site-url.com/payload/</loc>
-         <lastmod>2025-08-15</lastmod>
+         <lastmod>2025-10-15</lastmod>
     </url>
     <url>
          <loc>https://your-site-url.com/webhooks/cdr/</loc>
-         <lastmod>2025-08-15</lastmod>
+         <lastmod>2025-10-15</lastmod>
     </url>
     <url>
          <loc>https://your-site-url.com/webhooks/queue_monitor/</loc>
-         <lastmod>2025-08-15</lastmod>
+         <lastmod>2025-10-15</lastmod>
     </url>
     <url>
          <loc>https://your-site-url.com/webhooks/telephony/</loc>
-         <lastmod>2025-08-15</lastmod>
+         <lastmod>2025-10-15</lastmod>
     </url>
     <url>
          <loc>https://your-site-url.com/webhooks/user_presence/</loc>
-         <lastmod>2025-08-15</lastmod>
+         <lastmod>2025-10-15</lastmod>
     </url>
 </urlset>
